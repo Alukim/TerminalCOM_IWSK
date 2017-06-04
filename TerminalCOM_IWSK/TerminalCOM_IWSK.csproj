@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\OptionsExtensions.cs" />
+    <Compile Include="Extensions\PortExtensions.cs" />
+    <Compile Include="Extensions\TerminalExtensions.cs" />
+    <Compile Include="Resources\OptionsCollections.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
