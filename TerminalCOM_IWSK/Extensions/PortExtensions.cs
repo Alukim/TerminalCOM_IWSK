@@ -40,14 +40,50 @@ namespace TerminalCOM_IWSK.Extensions
                 {
                     serialPort.Open();
                     mainWindow.DisableAllFields();
+                    mainWindow.EnableAfterConnection();
                     mainWindow.ChangeStatusOfConnection(Colors.Green, $"Połączono z portem: {serialPort.PortName}");
                 }
                 catch(Exception exception)
                 {
                     mainWindow.ChangeStatusOfConnection(Colors.Red, $"Błąd połączenia z portem: {serialPort.PortName}");
                     mainWindow.EnableAllFields();
+                    mainWindow.EnableAfterDisconnection();
                     MainWindowExtensions.ShowError($"Błąd połączenia: \n{exception.Message}");
                 }
+            }
+        }
+
+        public static void DisconnectDevice(this MainWindow mainWindow)
+        {
+            if(mainWindow.serialPort.IsOpen)
+            {
+                mainWindow.serialPort.Close();
+            }
+
+            mainWindow.EnableAllFields();
+            mainWindow.ChangeStatusOfConnection(Colors.Red, "Brak połączenia");
+        }
+
+        public static void SendMessage(this MainWindow mainWindow)
+        {
+            if (mainWindow.serialPort.IsOpen)
+            {
+                var command = mainWindow.commandText.Text;
+                mainWindow.textBox.AddColorText($"Master: {command}", Brushes.Blue);
+                mainWindow.serialPort.WriteLine(command);
+            }
+            else
+            {
+                MainWindowExtensions.ShowInformation("Aby wysłać komendę musisz ustanowić połączenie");
+            }
+        }
+
+        public static void ReceivedData(this MainWindow mainWindow)
+        {
+            var inputData = mainWindow.serialPort.ReadExisting();
+            if (!string.IsNullOrEmpty(inputData))
+            {
+                mainWindow.textBox.AddColorText($"Slave: {inputData}", Brushes.Green);
             }
         }
     }

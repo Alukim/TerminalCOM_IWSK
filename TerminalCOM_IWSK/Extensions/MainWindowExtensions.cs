@@ -14,7 +14,6 @@ namespace TerminalCOM_IWSK.Extensions
             mainWindow.defaultOptionsButton.IsEnabled = false;
             mainWindow.saveOptionsButton.IsEnabled = false;
             mainWindow.returnOptionsButton.IsEnabled = false;
-            mainWindow.connectButton.IsEnabled = false;
         }
 
         public static void EnableAllFields(this MainWindow mainWindow)
@@ -27,7 +26,6 @@ namespace TerminalCOM_IWSK.Extensions
             mainWindow.defaultOptionsButton.IsEnabled = true;
             mainWindow.saveOptionsButton.IsEnabled = true;
             mainWindow.returnOptionsButton.IsEnabled = true;
-            mainWindow.connectButton.IsEnabled = true;
         }
 
         public static void ShowInformation(string text)

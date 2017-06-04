@@ -15,18 +15,21 @@
         <TabControl HorizontalAlignment="Left" Height="306" Margin="5,5,0,0" VerticalAlignment="Top" Width="299">
             <TabItem Header="Terminal">
                 <Grid Background="#FFFF">
-                    <Button Name="connectButton" Content="Połącz" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
-                    <RichTextBox Name="textBox" HorizontalAlignment="Left" Height="140" Margin="10,30,0,0" VerticalAlignment="Top" Width="274">
+                    <Button Name="connectButton" Content="Połącz" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
+                    <RichTextBox Name="textBox" HorizontalAlignment="Left" Height="137" Margin="10,31,0,0" VerticalAlignment="Top" Width="274">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="RichTextBox"/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
-                    <Border Name="border" BorderBrush="Red" Background="Red" BorderThickness="1" HorizontalAlignment="Left" Height="20" Margin="10,248,0,0" VerticalAlignment="Top" Width="20"/>
-                    <Label Name="connectionLabel" Content="Brak połączenia" HorizontalAlignment="Left" Margin="44,244,0,0" VerticalAlignment="Top" Width="228"/>
-                    <Button x:Name="sentButton" Content="Wyślij" HorizontalAlignment="Left" Margin="104,220,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
-                    <Button x:Name="disconnectButton" Content="Rozłącz" HorizontalAlignment="Left" Margin="197,220,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
+                    <Border Name="border" BorderBrush="Red" Background="Red" BorderThickness="1" HorizontalAlignment="Left" Height="20" Margin="10,250,0,0" VerticalAlignment="Top" Width="20"/>
+                    <Label Name="connectionLabel" Content="Brak połączenia" HorizontalAlignment="Left" Margin="44,246,0,0" VerticalAlignment="Top" Width="228"/>
+                    <Button x:Name="sentButton" Click="SentButtonClick" Content="Wyślij" HorizontalAlignment="Left" Margin="104,222,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="disconnectButton" Click="DisconnectButtonClick" Content="Rozłącz" HorizontalAlignment="Left" Margin="197,222,0,0" VerticalAlignment="Top" Width="75" />
+                    <Label Content="LOGI" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="commandText" HorizontalAlignment="Left" Height="23" Margin="10,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274"/>
+                    <Label Content="Komenda do wysłania" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top" Height="30"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Opcje">
