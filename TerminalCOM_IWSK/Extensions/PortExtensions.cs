@@ -61,6 +61,7 @@ namespace TerminalCOM_IWSK.Extensions
             }
 
             mainWindow.EnableAllFields();
+            mainWindow.EnableAfterDisconnection();
             mainWindow.ChangeStatusOfConnection(Colors.Red, "Brak połączenia");
         }
 

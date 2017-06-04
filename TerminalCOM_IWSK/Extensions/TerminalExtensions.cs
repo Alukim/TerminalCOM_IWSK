@@ -8,23 +8,23 @@ namespace TerminalCOM_IWSK.Extensions
     {
         public static void AddColorText(this RichTextBox richTextBox, string text, Brush brush)
         {
-            TextRange textRange = new TextRange(richTextBox.Document.ContentEnd, richTextBox.Document.ContentEnd);
-            textRange.Text = $"{text}";
-            textRange.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
-            richTextBox.AppendText("\r");
+            richTextBox.Dispatcher.Invoke(() =>
+            {
+                TextRange textRange = new TextRange(richTextBox.Document.ContentEnd, richTextBox.Document.ContentEnd);
+                textRange.Text = $"{text}";
+                textRange.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
+                richTextBox.AppendText("\r");
+            });
         }
+
+        public static void InitializeRichTextBox(this MainWindow mainWindow)
+            => mainWindow.textBox.Document.Blocks.Clear();
 
         public static void ChangeStatusOfConnection(this MainWindow mainWindow, Color color, string labelText)
         {
             mainWindow.border.BorderBrush = new SolidColorBrush(color);
             mainWindow.border.Background = new SolidColorBrush(color);
             mainWindow.connectionLabel.Content = labelText;
-        }
-
-        public static void InitializeRichTextBox(this MainWindow mainWindow)
-        {
-            mainWindow.textBox.Document.Blocks.Clear();
-            mainWindow.textBox.IsEnabled = false;
         }
 
         public static void InitializeButtons(this MainWindow mainWindow)
