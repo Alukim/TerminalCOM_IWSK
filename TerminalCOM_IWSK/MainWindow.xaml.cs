@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Windows;
+using System.Windows.Media;
 using TerminalCOM_IWSK.Extensions;
 
 namespace TerminalCOM_IWSK
@@ -10,7 +11,7 @@ namespace TerminalCOM_IWSK
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly SerialPort serialPort;
+        public readonly SerialPort serialPort;
 
         private void InitializeOptions()
         {
@@ -23,13 +24,36 @@ namespace TerminalCOM_IWSK
             InitializeComponent();
             InitializeOptions();
 
-            serialPort = PortExtensions.InitializeSerialPortWithDefaultValues();
+            serialPort = PortExtensions.InitializeSerialPortWithDefaultValues(WriteResponseData);
+        }
+
+        public void WriteResponseData(object sender, SerialDataReceivedEventArgs eventArgs)
+        {
+            
         }
 
         public void SetDefaultButtonClick(object sender, RoutedEventArgs eventArgs)
         {
             this.SetDefaultComboBoxesValues();
+            this.SaveSerialPortOptions();
+            MainWindowExtensions.ShowInformation("Przywrócono ustawienia domyślne.");
         }
 
+        public void SaveOptionsButtonClick(object sender, RoutedEventArgs eventArgs)
+        {
+            this.SaveSerialPortOptions();
+            MainWindowExtensions.ShowInformation("Zapisano nowe ustawienia");
+        }
+
+        public void ReturnButtonClick(object sender, RoutedEventArgs eventArgs)
+        {
+            this.ReturnComboBoxesValues(serialPort);
+            MainWindowExtensions.ShowInformation("Przywrócono nie zapisane zmiany");
+        }
+
+        public void ConnectButtonClick(object sender, RoutedEventArgs eventArgs)
+        {
+            this.ConnectToDevice();
+        }
     }
 }

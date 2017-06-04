@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\MainWindowExtensions.cs" />
     <Compile Include="Extensions\OptionsExtensions.cs" />
     <Compile Include="Extensions\PortExtensions.cs" />
     <Compile Include="Extensions\TerminalExtensions.cs" />

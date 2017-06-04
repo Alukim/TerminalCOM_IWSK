@@ -3,19 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TerminalCOM_IWSK"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="TerminalCOM" Height="350" Width="320">
     <Window.Resources>
-        <System:Double x:Key="checkBoxLeftMargin">180</System:Double>
+        <System:Double x:Key="comboBoxLeftMargin">200</System:Double>
         <System:Double x:Key="labelWidth">90</System:Double>
         <System:Double x:Key="buttonTopMargin">210</System:Double>
     </Window.Resources>
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="300" Margin="10,10,10,10" VerticalAlignment="Top" Width="300">
+        <TabControl HorizontalAlignment="Left" Height="306" Margin="5,5,0,0" VerticalAlignment="Top" Width="299">
             <TabItem Header="Terminal">
-                <Grid Background="#FFFF"/>
+                <Grid Background="#FFFF">
+                    <Button Name="connectButton" Content="Połącz" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
+                    <RichTextBox Name="textBox" HorizontalAlignment="Left" Height="140" Margin="10,30,0,0" VerticalAlignment="Top" Width="274">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="RichTextBox"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                    <Border Name="border" BorderBrush="Red" Background="Red" BorderThickness="1" HorizontalAlignment="Left" Height="20" Margin="10,248,0,0" VerticalAlignment="Top" Width="20"/>
+                    <Label Name="connectionLabel" Content="Brak połączenia" HorizontalAlignment="Left" Margin="44,244,0,0" VerticalAlignment="Top" Width="228"/>
+                    <Button x:Name="sentButton" Content="Wyślij" HorizontalAlignment="Left" Margin="104,220,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
+                    <Button x:Name="disconnectButton" Content="Rozłącz" HorizontalAlignment="Left" Margin="197,220,0,0" VerticalAlignment="Top" Width="75" Click="ConnectButtonClick"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Opcje">
                 <Grid Background="#FFFF">
@@ -23,7 +35,7 @@
                     <Label Content="Nazwa portu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="{StaticResource labelWidth}"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="25" Name="portComboBox">
                         <ComboBox.Margin>
-                            <Thickness Top="10" Left="{StaticResource checkBoxLeftMargin}" Right="0"
+                            <Thickness Top="10" Left="{StaticResource comboBoxLeftMargin}" Right="0"
                                 Bottom ="0" />
                         </ComboBox.Margin>
                     </ComboBox>
@@ -32,7 +44,7 @@
                     <Label Content="Prędkość" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Width="{StaticResource labelWidth}"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="25" Name="speedComboBox">
                         <ComboBox.Margin>
-                            <Thickness Top="50" Left="{StaticResource checkBoxLeftMargin}" Right="0"
+                            <Thickness Top="50" Left="{StaticResource comboBoxLeftMargin}" Right="0"
                                 Bottom ="0" />
                         </ComboBox.Margin>
                     </ComboBox>
@@ -41,7 +53,7 @@
                     <Label Content="Bity danych" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0" Width="{StaticResource labelWidth}"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="25" Name="dataComboBox">
                         <ComboBox.Margin>
-                            <Thickness Top="90" Left="{StaticResource checkBoxLeftMargin}" Right="0"
+                            <Thickness Top="90" Left="{StaticResource comboBoxLeftMargin}" Right="0"
                                 Bottom ="0" />
                         </ComboBox.Margin>
                     </ComboBox>
@@ -50,7 +62,7 @@
                     <Label Content="Bity Parzystości" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,0,0" Width="{StaticResource labelWidth}"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="25" Name="parityComboBox">
                         <ComboBox.Margin>
-                            <Thickness Top="130" Left="{StaticResource checkBoxLeftMargin}" Right="0"
+                            <Thickness Top="130" Left="{StaticResource comboBoxLeftMargin}" Right="0"
                                 Bottom ="0" />
                         </ComboBox.Margin>
                     </ComboBox>
@@ -59,34 +71,31 @@
                     <Label Content="Bity Stopu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,170,0,0" Width="{StaticResource labelWidth}"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="77" Height="25" Name="stopComboBox">
                         <ComboBox.Margin>
-                            <Thickness Top="170" Left="{StaticResource checkBoxLeftMargin}" Right="0"
+                            <Thickness Top="170" Left="{StaticResource comboBoxLeftMargin}" Right="0"
                                 Bottom ="0" />
                         </ComboBox.Margin>
                     </ComboBox>
 
-                    <Button Content="Zapisz ustawienia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100">
+                    <Button Content="Zapisz ustawienia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Name="saveOptionsButton" Click="SaveOptionsButtonClick">
                         <Button.Margin>
                             <Thickness Top="{StaticResource buttonTopMargin}" Left="30" Right="0"
                                 Bottom ="0" />
                         </Button.Margin>
                     </Button>
 
-                    <Button Content="Cofnij zmiany" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100">
+                    <Button Content="Cofnij zmiany" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Name="returnOptionsButton" Click="ReturnButtonClick">
                         <Button.Margin>
-                            <Thickness Top="{StaticResource buttonTopMargin}" Left="160" Right="30"
-                                Bottom ="0" />
+                            <Thickness Top="{StaticResource buttonTopMargin}" Left="160" Right="30"/>
                         </Button.Margin>
                     </Button>
 
-                    <Button Content="Ustawienia domyślne" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SetDefaultButtonClick">
+                    <Button Content="Ustawienia domyślne" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Name="defaultOptionsButton" Click="SetDefaultButtonClick">
                         <Button.Margin>
-                            <Thickness Top="240" Left="50" Right="50"
-                                Bottom ="0" />
+                            <Thickness Top="240" Left="45"/>
                         </Button.Margin>
                     </Button>
                 </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>
